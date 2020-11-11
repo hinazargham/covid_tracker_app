@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import './App.css';
 import NavBar from './components/NavBar';
 import Panel from './components/Panel';
 import Footer from './components/Footer';
-
 
 function App() {
 
@@ -13,7 +11,6 @@ function App() {
       <NavBar />
       <Panel currentScreen={screenConfig[0]}/>
       <br/>
-     
       <Footer screenConfig={screenConfig} />
 
     </div>

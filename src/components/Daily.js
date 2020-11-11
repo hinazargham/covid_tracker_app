@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Countries() {
+export default function Daily() {
 
   const [CountryData, setCountryData]= useState({});
 //   console.log(currentScreen);
