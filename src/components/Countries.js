@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { DataUsageOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,27 +23,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function GlobalStats() {
+export default function Countries() {
 
-  const [globalData, setGlobalData]= useState({});
-//   console.log(currentScreen);
+  const [CountryData, setCountryData]= useState({});
+  // console.log(currentScreen);
     useEffect(()=>{
         async function getData(){
-            const response = await fetch("https://covid19.mathdro.id/api");
-            // const response = await fetch("https://api.thevirustracker.com/free-api?global=stats"); api not working
-            let data=await response.json();
-            delete data.source;
-            delete data.image;
-            delete data.dailyTimeSeries;
-            delete data.countryDetail;
-            delete data.dailySummary;
+            const response = await fetch("https://covid19.mathdro.id/api/countries/Pakistan");
+           let data=await response.json();
+            // delete data.source;
+            // delete data.image;
+            // delete data.dailyTimeSeries;
+            // delete data.Confirmed;
+            // delete data.dailySummary;
             delete data.lastUpdate;
-            delete data.countries;
+            // delete data.countries;
             delete data.confirmed.detail;
             delete data.recovered.detail;
             delete data.deaths.detail;
     
-            setGlobalData(data);
+            setCountryData(data);
             console.log(data)
         }
         getData();
@@ -52,21 +52,20 @@ export default function GlobalStats() {
   return (
     <div className={classes.root}>
 
-<h3 className={classes.title}>Covid19 Updates (Live) Worldwide</h3>
+        <h3 className={classes.title}>Covid19 Updates (LIVE) in Pakistan</h3>
 
       <Grid container spacing={3}>
 
-        {Object.keys(globalData).map((key,index)=> 
+        {Object.keys(CountryData).map((key,index)=> 
         {
           return (
             <Grid item xs={12} sm={4} key={index}>
           <Paper className={classes.paper} 
           elevation={5}>
             <h3 className={classes.title}>
-              {/* {key.toLocaleUpperCase()} */}
               {key}
               </h3>
-            <h4>{globalData[key].value.toLocaleString()}</h4>
+            <h4>{CountryData[key].value}</h4>
           <i>Number of {key} cases</i>
 
           </Paper>

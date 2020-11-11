@@ -1,20 +1,43 @@
-import React from 'react';
-import GlobalStats from './GlobalStats';
-import Countries from './Countries';
-// import AllCountries from './AllCountries';
+import React, { useState, useEffect} from 'react';
+import { MenuItem, FormControl, Select } from "@material-ui/core";
 
+const AllCountries = () => {
+    const [countries, setCountries]= useState([]);
 
-export default function Panel({currentScreen}) {
+  useEffect(() => {
+      const getCountriesData = async () => {
+          await fetch ("https://disease.sh/v3/covid-19/all")
+          .then((response) => response.json())
+          .then((data) => {
+              const countries = data.map((country) => ({
+                      name : country.country,
+                      value: country.countryInfo.iso2,
+                  }));
+                  setCountries(countries);
+            }); 
+    };
+    getCountriesData();
+ },[]);
 
-  if(currentScreen === 0)
-    return <GlobalStats />
-  else if(currentScreen === 1)
-    return <Countries />
-  // else if(currentScreen === 2)
-  // return <AllCountries />
-  else return <GlobalStats/>
-
+  return (
+  <div>
+    <div>
+    <FormControl>
+        <Select 
+        variant="outlined" value="abc">
+            {countries.map((country) => (
+            <MenuItem value={country.value}>{country.name}</MenuItem>
+              ))}
+        </Select>
+    </FormControl>
+    </div>
+  </div>
+  );
 }
+export default AllCountries;
+
+
+// import React from 'react';
 // import { useEffect, useState } from 'react';
 // import { makeStyles } from '@material-ui/core/styles';
 // import Paper from '@material-ui/core/Paper';
@@ -37,25 +60,21 @@ export default function Panel({currentScreen}) {
 //   }
 // }));
 
-// export default function Panel({currentScreen}) {
+// export default function GlobalStats() {
 
 //   const [globalData, setGlobalData]= useState({});
-//   console.log(currentScreen);
+// //   console.log(currentScreen);
 //     useEffect(()=>{
 //         async function getData(){
-//             const response = await fetch("https://covid19.mathdro.id/api");
-//             // const response = await fetch("https://api.thevirustracker.com/free-api?global=stats"); api not working
+//             const response = await fetch("https://disease.sh/v3/covid-19/countries");
 //             let data=await response.json();
-//             delete data.source;
+//             delete data.updated;
 //             delete data.image;
 //             delete data.dailyTimeSeries;
 //             delete data.countryDetail;
 //             delete data.dailySummary;
 //             delete data.lastUpdate;
 //             delete data.countries;
-//             delete data.confirmed.detail;
-//             delete data.recovered.detail;
-//             delete data.deaths.detail;
     
 //             setGlobalData(data);
 //             console.log(data)
@@ -76,11 +95,9 @@ export default function Panel({currentScreen}) {
 //           <Paper className={classes.paper} 
 //           elevation={5}>
 //             <h3 className={classes.title}>
-//               {/* {key.toLocaleUpperCase()} */}
 //               {key}
 //               </h3>
-//             <h4>{globalData[key].value.toLocaleString()}</h4>
-//           <i>Number of {key} cases</i>
+//             <h4>{globalData[key].value}</h4>
 
 //           </Paper>
 //         </Grid>

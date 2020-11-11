@@ -10,13 +10,11 @@ function App() {
   const screenConfig = useState(0);
   return (
     <div>
-
       <NavBar />
       <Panel currentScreen={screenConfig[0]}/>
       <br/>
+     
       <Footer screenConfig={screenConfig} />
-
-
 
     </div>
   );
