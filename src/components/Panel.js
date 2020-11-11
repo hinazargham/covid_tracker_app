@@ -21,9 +21,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Panel() {
+export default function Panel({currentScreen}) {
 
   const [globalData, setGlobalData]= useState({});
+  console.log(currentScreen);
     useEffect(()=>{
         async function getData(){
             const response = await fetch("https://covid19.mathdro.id/api");
@@ -62,7 +63,7 @@ export default function Panel() {
               {/* {key.toLocaleUpperCase()} */}
               {key}
               </h3>
-            <h4>{globalData[key].value}</h4>
+            <h4>{globalData[key].value.toLocaleString()}</h4>
           <i>Number of {key} cases</i>
 
           </Paper>
