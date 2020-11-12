@@ -12,7 +12,6 @@ function App() {
       <Panel currentScreen={screenConfig[0]}/>
       <br/>
       <Footer screenConfig={screenConfig} />
-
     </div>
   );
 }
