@@ -6,6 +6,7 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import SvgIcon from '@material-ui/core/SvgIcon';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import covid from './covid.png'
 
 const useStyles = makeStyles({
   root: {
@@ -40,10 +41,13 @@ export default function Footer({screenConfig}) {
       showLabels
       className={classes.root}
     >
+      
       <BottomNavigationAction label="Global Stats" icon={<RestoreIcon />} />
       <BottomNavigationAction label="Pakistan Stats" icon={<HomeIcon />} />
       <BottomNavigationAction label="All Countries Stats" icon={<LocationOnIcon />} />
       {/* <BottomNavigationAction label="Graphs" icon={<FavoriteIcon/>} /> */}
+      <img src={covid} alt="covid" />;
+      
     </BottomNavigation>
   );
 }

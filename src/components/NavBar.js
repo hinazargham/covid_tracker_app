@@ -7,6 +7,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 // import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
+ 
   root: {
     flexGrow: 1,
   },
@@ -70,11 +71,14 @@ export default function NavBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
+
             Covid-19 Tracker by Hina Zargham
+           
           </Typography>
           
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
+             <img src={covid} alt="covid" />;
               <SearchIcon />
             </div>
 
@@ -89,6 +93,9 @@ export default function NavBar() {
           </div> */}
         </Toolbar>
       </AppBar>
+      
+      
+      
     </div>
   );
 }
