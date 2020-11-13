@@ -64,7 +64,6 @@ export default function GlobalStats() {
           <Paper className={classes.paper} 
           elevation={5}>
             <h3 className={classes.title}>
-
               {/* {key.toLocaleUpperCase()} */}
               {key}
               </h3>
@@ -77,6 +76,7 @@ export default function GlobalStats() {
 
           </Paper>
         </Grid>
+
 
     
         

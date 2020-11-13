@@ -37,7 +37,7 @@ export default function Countries() {
             // delete data.dailyTimeSeries;
             // delete data.Confirmed;
             // delete data.dailySummary;
-            delete data.lastUpdate;
+            // delete data.lastUpdate;
             // delete data.countries;
             delete data.confirmed.detail;
             delete data.recovered.detail;
@@ -69,7 +69,7 @@ export default function Countries() {
             <h4>
             <CountUp start={0} end={CountryData[key].value} duration={0.5} separator="," />
             </h4>
-          <i>Number of {key} cases</i>
+          <i> Number of {key} cases </i>
 
           </Paper>
         </Grid>
