@@ -1,7 +1,7 @@
 import React from 'react';
 import GlobalStats from './GlobalStats';
 import Countries from './Countries';
-import All from './All';
+import Daily from './Daily';
 
 
 export default function Panel({currentScreen}) {
@@ -11,7 +11,7 @@ export default function Panel({currentScreen}) {
   else if(currentScreen === 1)
     return <Countries />
   else if(currentScreen === 2)
-  return <All />
+  return <Daily />
   else return <GlobalStats/>
 
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import CountUp from 'react-countup';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,18 +64,26 @@ export default function GlobalStats() {
           <Paper className={classes.paper} 
           elevation={5}>
             <h3 className={classes.title}>
+
               {/* {key.toLocaleUpperCase()} */}
               {key}
               </h3>
-            <h4>{globalData[key].value.toLocaleString()}</h4>
+            <h4>
+            <CountUp start={0} end={globalData[key].value} duration={2.75} separator="," />
+              {/* {globalData[key].value} */}
+            </h4>
+              
           <i>Number of {key} cases</i>
 
           </Paper>
         </Grid>
+
+    
         
           )
         })}
       </Grid>
+
     </div>
   );
 }

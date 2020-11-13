@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import CountUp from 'react-countup';
 import { DataUsageOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +66,9 @@ export default function Countries() {
             <h3 className={classes.title}>
               {key}
               </h3>
-            <h4>{CountryData[key].value}</h4>
+            <h4>
+            <CountUp start={0} end={CountryData[key].value} duration={0.5} separator="," />
+            </h4>
           <i>Number of {key} cases</i>
 
           </Paper>

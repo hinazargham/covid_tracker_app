@@ -10,6 +10,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 const useStyles = makeStyles({
   root: {
       position: 'absolute',
+      top: 50,
       bottom: 0,
       right: 0,
       left: 0
@@ -42,7 +43,7 @@ export default function Footer({screenConfig}) {
       <BottomNavigationAction label="Global Stats" icon={<RestoreIcon />} />
       <BottomNavigationAction label="Pakistan Stats" icon={<HomeIcon />} />
       <BottomNavigationAction label="All Countries Stats" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Graphs" icon={<FavoriteIcon/>} />
+      {/* <BottomNavigationAction label="Graphs" icon={<FavoriteIcon/>} /> */}
     </BottomNavigation>
   );
 }
