@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Panel from './components/Panel';
 import Footer from './components/Footer';
 
+
 function App() {
 
   const screenConfig = useState(0);
@@ -12,6 +13,7 @@ function App() {
       <Panel currentScreen={screenConfig[0]}/>
       <br/>
       <Footer screenConfig={screenConfig} />
+      
     </div>
   );
 }

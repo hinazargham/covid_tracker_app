@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CountUp from 'react-countup';
+import Time from './Time'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,12 +78,12 @@ export default function GlobalStats() {
           </Paper>
         </Grid>
 
-
-    
         
           )
         })}
       </Grid>
+
+      <Time/>
 
     </div>
   );

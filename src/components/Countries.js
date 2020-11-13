@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CountUp from 'react-countup';
+import Time from './Time';
 // import { DataUsageOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -77,6 +78,8 @@ export default function Countries() {
           )
         })}
       </Grid>
+
+      <Time />
     </div>
   );
 }
