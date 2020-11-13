@@ -37,7 +37,7 @@ export default function Countries() {
             // delete data.dailyTimeSeries;
             // delete data.Confirmed;
             // delete data.dailySummary;
-            // delete data.lastUpdate;
+            delete data.lastUpdate;
             // delete data.countries;
             delete data.confirmed.detail;
             delete data.recovered.detail;
