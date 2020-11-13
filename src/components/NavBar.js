@@ -1,5 +1,4 @@
 import React from 'react';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -15,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    textAlign: 'center',
     flexGrow: 1,
     display: 'none',
     [theme.breakpoints.up('sm')]: {
@@ -73,10 +73,12 @@ export default function NavBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Covid-19 Tracker by Hina Zargham
           </Typography>
-          <div className={classes.search}>
+          
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
+
             <InputBase
               placeholder="Enter Country"
               classes={{
@@ -85,7 +87,7 @@ export default function NavBar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>
