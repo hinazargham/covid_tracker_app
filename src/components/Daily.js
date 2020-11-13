@@ -3,11 +3,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MenuItem, FormControl, Select } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+// import './App.css';
 
 
 const useStyles = makeStyles({
   all: {
-    textAlign:'right'
+      position: 'absolute',
+      top: 60,
+      bottom: 0,
+      right: 0,
+      textAlign:'center',
+      flex:0.9,
 
   },
   title:{
@@ -17,12 +23,12 @@ const useStyles = makeStyles({
   }
 });
 
-const AllCountries = () => {
+const Daily = () => {
   const classes = useStyles();
-  const [countries, setCountries]= useState([]);
   const [country, setInputCountry] = useState("worldwide");
-  const [countryInfo, setCountryInfo]= useState({})
-
+  const [countryInfo, setCountryInfo]= useState({});
+  const [countries, setCountries]= useState([]);
+  
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
@@ -49,7 +55,7 @@ const AllCountries = () => {
 
   useEffect(() => {
       const getCountriesData = async () => {
-          await fetch ("https://disease.sh/v3/covid-19/countries")
+          fetch ("https://disease.sh/v3/covid-19/countries")
           .then((response) => response.json())
           .then((data) => {
               const countries = data.map((country) => ({
@@ -62,16 +68,15 @@ const AllCountries = () => {
     getCountriesData();
  },[]);
 
- const onCountryChange = (event) =>{
-   const countryCode= event.target.value;
-   console.log("hhh",countryCode)
-   setInputCountry(countryCode);
+ const onCountryChange = async (e) => {
+   const countryCode= e.target.value;
 
    const url =
-      countryCode === "worldwide"
-        ? "https://disease.sh/v3/covid-19/all"
-        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
-    fetch(url)
+   countryCode === "worldwide"
+     ? "https://disease.sh/v3/covid-19/all"
+     : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+
+    await fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setInputCountry(countryCode);
@@ -91,14 +96,13 @@ const AllCountries = () => {
         delete url.oneTestPerPeople;
         delete url.updated;
         delete url.casesPerOneMillion;
-        console.log(countryInfo)
       });
   };
   return (
   <div className={classes.all}>
 
-    {/* <h3 className={classes.title}>Find covid19 stats of any country</h3>
-  */}
+    <h3 className={classes.title}>Find covid19 stats of any country</h3>
+ 
     <FormControl>
         <Select 
         variant="outlined" 
@@ -127,77 +131,6 @@ const AllCountries = () => {
   </div>
   );
 }
-export default AllCountries;
+export default Daily;
 
 
-// import React from 'react';
-// import { useEffect, useState } from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
-// import Grid from '@material-ui/core/Grid';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     maxWidth: 1000,
-//     margin:'0 auto',
-//     marginTop:50
-//   },
-//   paper: {
-//     padding: theme.spacing(2),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//   },
-//   title:{
-//     color:'#3f51b5',
-//     textTransform: 'uppercase',
-//   }
-// }));
-
-// export default function GlobalStats() {
-
-//   const [globalData, setGlobalData]= useState({});
-// //   console.log(currentScreen);
-//     useEffect(()=>{
-//         async function getData(){
-//             const response = await fetch("https://disease.sh/v3/covid-19/countries");
-//             let data=await response.json();
-//             delete data.updated;
-//             delete data.image;
-//             delete data.dailyTimeSeries;
-//             delete data.countryDetail;
-//             delete data.dailySummary;
-//             delete data.lastUpdate;
-//             delete data.countries;
-    
-//             setGlobalData(data);
-//             console.log(data)
-//         }
-//         getData();
-//     },[])
-//   const classes = useStyles();
-
-//   return (
-//     <div className={classes.root}>
-
-//       <Grid container spacing={3}>
-
-//         {Object.keys(globalData).map((key,index)=> 
-//         {
-//           return (
-//             <Grid item xs={12} sm={4} key={index}>
-//           <Paper className={classes.paper} 
-//           elevation={5}>
-//             <h3 className={classes.title}>
-//               {key}
-//               </h3>
-//             <h4>{globalData[key].value}</h4>
-
-//           </Paper>
-//         </Grid>
-        
-//           )
-//         })}
-//       </Grid>
-//     </div>
-//   );
-// }
