@@ -85,7 +85,7 @@ const Daily = () => {
    const url =
    countryCode === "worldwide"
      ? "https://covid19.mathdro.id/api/countries"
-     : `"https://covid19.mathdro.id/api/countries/${countryCode}]`;
+     : `https://covid19.mathdro.id/api/countries/${countryCode}`;
   
   useEffect(()=>{
     async function getInputData(){
@@ -136,6 +136,7 @@ const Daily = () => {
           <Paper className={classes.paper} elevation={5}>
           <h3 className={classes.title}>{key}</h3>
           <h4>{countryInfo[key].value}</h4>
+          
           </Paper>
       </Grid>
   ) })}
