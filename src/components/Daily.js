@@ -3,14 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MenuItem, FormControl, Select } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Time from './Time';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     textAlign:'center',
-    maxWidth: 800,
-    // margin:'0 auto',
-    marginTop:50,
-    
+    position: 'center',
+    maxWidth: 1000,
+    margin:'0 auto',
+    // marginTop:50,
   },
   all: {
       marginTop: 60,
@@ -67,31 +68,16 @@ const Daily = () => {
           fetch ("https://covid19.mathdro.id/api/countries")
           .then((response) => response.json())
           .then((data) => {
-              const countries = [data].map((country) => ({
-                      name : country.countries.name,
-                      value: country.countries.iso3,
-                  }));
-                  setCountries(countries);
-            }); 
+            console.log("data of country",data)
+            const countries = [data].map((country) => ({
+              name : country.country,
+              value: country.iso3,
+          }));
+          setCountries(countries);
+    }); 
     };
     getCountriesData();
  },[]);
-
-//  useEffect(()=>{
-//   async function getCountriesData(){
-//       const response = await fetch("https://covid19.mathdro.id/api/countries");
-//       let data=await response.json()
-//       data => {
-//         const countries = [data].map((country) => ({
-//           name : country.countries.name,
-//           value: country.countries.iso3,
-//         }));
-//       },
-//       setCountries(countries);
-//   },
-//   getCountriesData();
-// },[]);
-
 
  const CountryChange = async (e) => {
    const countryCode= e.target.value;
@@ -128,7 +114,7 @@ const Daily = () => {
   return (
   <div className={classes.all}>
 
-    <h4>Find Covid19 Stats of any Country!!! </h4>
+    <h4>Stats of any Country!!! </h4>
  
     <FormControl className={classes.paper}>
         <Select 
@@ -146,7 +132,7 @@ const Daily = () => {
 
     {Object.keys(countryInfo).map((key,index)=> {
       return (
-      <Grid item xs={6} sm={3} key={index}>
+      <Grid item xs={12} sm={4} key={index}>
           <Paper className={classes.paper} elevation={5}>
           <h3 className={classes.title}>{key}</h3>
           <h4>{countryInfo[key].value}</h4>
@@ -154,6 +140,9 @@ const Daily = () => {
       </Grid>
   ) })}
   </Grid>  
+
+  <Time/>
+
    
   </div>
   );
