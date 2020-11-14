@@ -5,6 +5,13 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    textAlign:'center',
+    maxWidth: 800,
+    // margin:'0 auto',
+    marginTop:50,
+    
+  },
   all: {
       marginTop: 60,
       position: 'center',
@@ -70,6 +77,22 @@ const Daily = () => {
     getCountriesData();
  },[]);
 
+//  useEffect(()=>{
+//   async function getCountriesData(){
+//       const response = await fetch("https://covid19.mathdro.id/api/countries");
+//       let data=await response.json()
+//       data => {
+//         const countries = [data].map((country) => ({
+//           name : country.countries.name,
+//           value: country.countries.iso3,
+//         }));
+//       },
+//       setCountries(countries);
+//   },
+//   getCountriesData();
+// },[]);
+
+
  const CountryChange = async (e) => {
    const countryCode= e.target.value;
 
@@ -119,11 +142,11 @@ const Daily = () => {
         </Select>
     </FormControl>
 
-    <Grid container spacing={3}>
+    <Grid container spacing={3} className={classes.root}>
 
     {Object.keys(countryInfo).map((key,index)=> {
       return (
-      <Grid item xs={12} sm={4} key={index}>
+      <Grid item xs={6} sm={3} key={index}>
           <Paper className={classes.paper} elevation={5}>
           <h3 className={classes.title}>{key}</h3>
           <h4>{countryInfo[key].value}</h4>
