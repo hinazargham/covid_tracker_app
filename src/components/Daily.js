@@ -3,64 +3,66 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MenuItem, FormControl, Select } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-// import './App.css';
 
-
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   all: {
-      position: 'absolute',
+      marginTop: 60,
+      position: 'center',
       top: 60,
-      bottom: 0,
+      // bottom: 0,
       right: 0,
       textAlign:'center',
-      flex:0.9,
-
+      // flex:0.9,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
   title:{
     color:'#3f51b5',
     textTransform: 'uppercase',
     textAlign:'center'
   }
-});
+}));
 
 const Daily = () => {
   const classes = useStyles();
-  const [country, setInputCountry] = useState("worldwide");
+  const [country, setInputCountry] = useState("Worldwide");
   const [countryInfo, setCountryInfo]= useState({});
   const [countries, setCountries]= useState([]);
-  
-  useEffect(() => {
-    fetch("https://disease.sh/v3/covid-19/all")
-      .then((response) => response.json())
-      .then((data) => {
+
+
+  useEffect(()=>{
+    async function getcountryInfoData(){
+        const response = await fetch("https://covid19.mathdro.id/api");
+        let data=await response.json();
+
+        delete data.source;
+        delete data.image;
+        delete data.dailyTimeSeries;
+        delete data.countryDetail;
+        delete data.dailySummary;
+        delete data.lastUpdate;
+        delete data.countries;
+        delete data.confirmed.detail;
+        delete data.recovered.detail;
+        delete data.deaths.detail;
 
         setCountryInfo(data);
-
-        delete data.criticalPerOneMillion;
-        delete data.recoveredPerOneMillion;
-        delete data.activePerOneMillion;
-        delete data.oneDeathPerPeople;
-        delete data.oneCasePerPeople;
-        delete data.testsPerOneMillion;
-        delete data.deathsPerOneMillion;
-        delete data.continent;
-        delete data.population;
-        delete data.affectedCountries;
-        delete data.active;
-        delete data.oneTestPerPeople;
-        delete data.updated;
-        delete data.casesPerOneMillion;
-      });
-  }, []);
+        console.log(data)
+    }
+    getcountryInfoData();
+},[])
 
   useEffect(() => {
       const getCountriesData = async () => {
-          fetch ("https://disease.sh/v3/covid-19/countries")
+          fetch ("https://covid19.mathdro.id/api/countries")
           .then((response) => response.json())
           .then((data) => {
-              const countries = data.map((country) => ({
-                      name : country.country,
-                      value: country.countryInfo.iso2,
+              const countries = [data].map((country) => ({
+                      name : country.countries.name,
+                      value: country.countries.iso3,
                   }));
                   setCountries(countries);
             }); 
@@ -68,45 +70,47 @@ const Daily = () => {
     getCountriesData();
  },[]);
 
- const onCountryChange = async (e) => {
+ const CountryChange = async (e) => {
    const countryCode= e.target.value;
 
    const url =
    countryCode === "worldwide"
-     ? "https://disease.sh/v3/covid-19/all"
-     : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+     ? "https://covid19.mathdro.id/api/countries"
+     : `"https://covid19.mathdro.id/api/countries/${countryCode}]`;
+  
+  useEffect(()=>{
+    async function getInputData(){
+        const response = await fetch(url);
+        let data=await response.json();
+        
+        delete data.source;
+        delete data.image;
+        delete data.dailyTimeSeries;
+        delete data.countryDetail;
+        delete data.dailySummary;
+        delete data.lastUpdate;
+        delete data.countries;
+        delete data.confirmed.detail;
+        delete data.recovered.detail;
+        delete data.deaths.detail;
 
-    await fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
         setInputCountry(countryCode);
         setCountryInfo(data);
+        console.log(data)
+    };
+    getInputData();
+});
+ }
 
-        delete url.criticalPerOneMillion;
-        delete url.recoveredPerOneMillion;
-        delete url.activePerOneMillion;
-        delete url.oneDeathPerPeople;
-        delete url.oneCasePerPeople;
-        delete url.testsPerOneMillion;
-        delete url.deathsPerOneMillion;
-        delete url.continent;
-        delete url.population;
-        delete url.affectedCountries;
-        delete url.active;
-        delete url.oneTestPerPeople;
-        delete url.updated;
-        delete url.casesPerOneMillion;
-      });
-  };
   return (
   <div className={classes.all}>
 
-    <h3 className={classes.title}>Find covid19 stats of any country</h3>
+    <h4>Find Covid19 Stats of any Country!!! </h4>
  
-    <FormControl>
+    <FormControl className={classes.paper}>
         <Select 
         variant="outlined" 
-        onChange={onCountryChange}
+        onChange={CountryChange}
         value={country}>
           <MenuItem value="Worldwide">Worldwide</MenuItem>
             {countries.map((country) => (
@@ -115,14 +119,14 @@ const Daily = () => {
         </Select>
     </FormControl>
 
-    <Grid container spacing={6}>
+    <Grid container spacing={3}>
 
     {Object.keys(countryInfo).map((key,index)=> {
       return (
-      <Grid item sm={3} key={index}>
-        <Paper className={classes.paper} elevation={3}>
+      <Grid item xs={12} sm={4} key={index}>
+          <Paper className={classes.paper} elevation={5}>
           <h3 className={classes.title}>{key}</h3>
-          <h4>{countryInfo[key]}</h4>
+          <h4>{countryInfo[key].value}</h4>
           </Paper>
       </Grid>
   ) })}

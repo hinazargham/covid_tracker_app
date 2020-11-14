@@ -31,8 +31,8 @@ export default function GlobalStats() {
     useEffect(()=>{
         async function getData(){
             const response = await fetch("https://covid19.mathdro.id/api");
-            // const response = await fetch("https://api.thevirustracker.com/free-api?global=stats"); api not working
-            let data=await response.json();
+           let data=await response.json();
+
             delete data.source;
             delete data.image;
             delete data.dailyTimeSeries;
@@ -62,8 +62,7 @@ export default function GlobalStats() {
         {
           return (
             <Grid item xs={12} sm={4} key={index}>
-          <Paper className={classes.paper} 
-          elevation={5}>
+          <Paper className={classes.paper} elevation={5}>
             <h3 className={classes.title}>
               {/* {key.toLocaleUpperCase()} */}
               {key}
