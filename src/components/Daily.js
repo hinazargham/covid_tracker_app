@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MenuItem, FormControl, Select } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import CountUp from 'react-countup';
 import Time from './Time';
 
 const useStyles = makeStyles((theme) => ({
@@ -87,29 +88,39 @@ const Daily = () => {
    countryCode === "worldwide"
      ? "https://covid19.mathdro.id/api/countries"
      : `https://covid19.mathdro.id/api/countries/${countryCode}`;
-  
-  useEffect(()=>{
-    async function getInputData(){
-        const response = await fetch(url);
-        let data=await response.json();
-        
-        delete data.source;
-        delete data.image;
-        delete data.dailyTimeSeries;
-        delete data.countryDetail;
-        delete data.dailySummary;
-        delete data.lastUpdate;
-        delete data.countries;
-        delete data.confirmed.detail;
-        delete data.recovered.detail;
-        delete data.deaths.detail;
 
-        setInputCountry(countryCode);
-        setCountryInfo(data);
-        console.log(data)
-    };
-    getInputData();
-});
+     await fetch(url)
+     .then((response) => response.json())
+     .then((data) => {
+    
+       setInputCountry(countryCode);
+       delete data.lastUpdate;
+       setCountryInfo(data);
+     });
+
+  
+//   useEffect(()=>{
+//     async function getInputData(){
+//         const response = await fetch(url);
+//         let data=await response.json();
+        
+//         delete data.source;
+//         delete data.image;
+//         delete data.dailyTimeSeries;
+//         delete data.countryDetail;
+//         delete data.dailySummary;
+//         delete data.lastUpdate;
+//         delete data.countries;
+//         delete data.confirmed.detail;
+//         delete data.recovered.detail;
+//         delete data.deaths.detail;
+
+//         setInputCountry(countryCode);
+//         setCountryInfo(data);
+//         console.log(data)
+//     };
+//     getInputData();
+// });
  }
 
   return (
@@ -136,7 +147,10 @@ const Daily = () => {
       <Grid item xs={12} sm={4} key={index}>
           <Paper className={classes.paper} elevation={5}>
           <h3 className={classes.title}>{key}</h3>
-          <h4>{countryInfo[key].value}</h4>
+          <h4>
+            <CountUp start={0} end={countryInfo[key].value} duration={0.5} separator="," />
+            </h4>
+          <i> Number of {key} cases </i>
           
           </Paper>
       </Grid>

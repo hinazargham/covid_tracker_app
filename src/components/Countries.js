@@ -33,13 +33,8 @@ export default function Countries() {
         async function getData(){
             const response = await fetch("https://covid19.mathdro.id/api/countries/Pakistan");
            let data=await response.json();
-            // delete data.source;
-            // delete data.image;
-            // delete data.dailyTimeSeries;
-            // delete data.Confirmed;
-            // delete data.dailySummary;
+
             delete data.lastUpdate;
-            // delete data.countries;
             delete data.confirmed.detail;
             delete data.recovered.detail;
             delete data.deaths.detail;
