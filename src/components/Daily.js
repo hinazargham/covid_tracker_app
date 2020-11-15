@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const Daily = () => {
   const classes = useStyles();
   const [country, setInputCountry] = useState("Worldwide");
-  const [countryInfo, setCountryInfo]= useState({});
+  const [countryInfo, setCountryInfo]= useState([]);
   const [countries, setCountries]= useState([]);
 
 
@@ -69,11 +69,12 @@ const Daily = () => {
           .then((response) => response.json())
           .then((data) => {
             console.log("data of country",data)
-            const countries = [data].map((country) => ({
+            const countries = data.countries.map((country) => ({
               name : country.country,
               value: country.iso3,
           }));
           setCountries(countries);
+          console.log("after mapping data of country",countries)
     }); 
     };
     getCountriesData();
