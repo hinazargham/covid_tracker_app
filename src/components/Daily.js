@@ -70,7 +70,7 @@ const Daily = () => {
           .then((data) => {
             console.log("data of country",data)
             const countries = data.countries.map((country) => ({
-              name : country.country,
+              name : country.name,
               value: country.iso3,
           }));
           setCountries(countries);
