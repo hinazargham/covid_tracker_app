@@ -102,7 +102,7 @@ const CountryStats = () => {
   return (
   <div className={classes.all}>
 
-    <h4>Stats of any Country!!! </h4>
+<h3 className={classes.title}>Covid19 Updates (Live) for all Countries </h3>
  
     <FormControl className={classes.paper}>
         <Select 
@@ -134,7 +134,7 @@ const CountryStats = () => {
   </Grid>  
 
   <Time/>
-  
+
   </div>
   );
 }
