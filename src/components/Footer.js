@@ -4,7 +4,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import covid from './covid.png'
 
@@ -29,7 +29,6 @@ function HomeIcon(props) {
 export default function Footer({screenConfig}) {
   const classes = useStyles();
   console.log(screenConfig[0])
-//   const [value, setValue] = React.useState(0);
 
   return (
     <BottomNavigation
@@ -45,7 +44,7 @@ export default function Footer({screenConfig}) {
       <BottomNavigationAction label="Global Stats" icon={<RestoreIcon />} />
       <BottomNavigationAction label="Pakistan Stats" icon={<HomeIcon />} />
       <BottomNavigationAction label="All Countries Stats" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Graphs" icon={<FavoriteIcon/>} />
+      {/* <BottomNavigationAction label="Graphs" icon={<FavoriteIcon/>} /> */}
       <img src={covid} alt="covid" />;
       
     </BottomNavigation>

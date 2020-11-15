@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function GlobalStats() {
 
   const [globalData, setGlobalData]= useState({});
-//   console.log(currentScreen);
+
     useEffect(()=>{
         async function getData(){
             const response = await fetch("https://covid19.mathdro.id/api");
@@ -76,8 +76,6 @@ export default function GlobalStats() {
 
           </Paper>
         </Grid>
-
-        
           )
         })}
       </Grid>

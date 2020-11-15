@@ -61,14 +61,9 @@ export default function Time() {
             <h5 className={classes.title}>
               {key} :- {TimeData[key]}
               </h5>
-        
-            
+          
           </Paper>
         </Grid>
-
-
-    
-        
           )
         })}
       </Grid>

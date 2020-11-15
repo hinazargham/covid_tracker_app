@@ -75,22 +75,6 @@ export default function NavBar() {
             Covid-19 Tracker by Hina Zargham
            
           </Typography>
-          
-          {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-             <img src={covid} alt="covid" />;
-              <SearchIcon />
-            </div>
-
-            <InputBase
-              placeholder="Enter Country"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div> */}
         </Toolbar>
       </AppBar>
       

@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Daily = () => {
+const CountryStats = () => {
   const classes = useStyles();
   const [country, setInputCountry] = useState("Worldwide");
   const [countryInfo, setCountryInfo]= useState([]);
@@ -97,30 +97,6 @@ const Daily = () => {
        delete data.lastUpdate;
        setCountryInfo(data);
      });
-
-  
-//   useEffect(()=>{
-//     async function getInputData(){
-//         const response = await fetch(url);
-//         let data=await response.json();
-        
-//         delete data.source;
-//         delete data.image;
-//         delete data.dailyTimeSeries;
-//         delete data.countryDetail;
-//         delete data.dailySummary;
-//         delete data.lastUpdate;
-//         delete data.countries;
-//         delete data.confirmed.detail;
-//         delete data.recovered.detail;
-//         delete data.deaths.detail;
-
-//         setInputCountry(countryCode);
-//         setCountryInfo(data);
-//         console.log(data)
-//     };
-//     getInputData();
-// });
  }
 
   return (
@@ -150,7 +126,7 @@ const Daily = () => {
           <h4>
             <CountUp start={0} end={countryInfo[key].value} duration={0.5} separator="," />
             </h4>
-          <i> Number of {key} cases </i>
+      <p> Number of {key} cases </p>
           
           </Paper>
       </Grid>
@@ -158,11 +134,10 @@ const Daily = () => {
   </Grid>  
 
   <Time/>
-
-   
+  
   </div>
   );
 }
-export default Daily;
+export default CountryStats;
 
 

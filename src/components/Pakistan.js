@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Countries() {
+export default function Pakistan() {
 
   const [CountryData, setCountryData]= useState({});
-  // console.log(currentScreen);
+  
     useEffect(()=>{
         async function getData(){
             const response = await fetch("https://covid19.mathdro.id/api/countries/Pakistan");
